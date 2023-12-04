@@ -1,0 +1,5 @@
+User command - 2023-12-05T01:20:20.946161900: Park Vehicle
+License Plate: 435
+Entry Time: 2023-12-05 01:20:20
+Fare: 0.0
+------------------------

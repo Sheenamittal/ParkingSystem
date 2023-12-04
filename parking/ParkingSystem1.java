@@ -2,7 +2,12 @@ package parking;
 import vehicle.*;
 import timefare.*;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,13 +15,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import filehandling.*;
 
 
 
-
+interface ParkingManagement {
+    void parkVehicle();
+    void removeVehicle();
+    void viewParkedVehicles();
+    int countParkedVehicles(Vehicle[][] slots, String vehicleType);
+    void viewParkedVehiclesByType(Vehicle[][] slots, String vehicleType);
+    int countOccupiedSlots(Vehicle[][] slots);
+}
 
 public class ParkingSystem1 extends TimeFareController {
-
+	//public static marks = 10;
     static int smallCarSlots, mediumCarSlots, largeCarSlots, totalBikeSlots;
     static Vehicle[][] smallCarSlotsArray, mediumCarSlotsArray, largeCarSlotsArray, bikeSlotsArray;
     static Scanner sc = new Scanner(System.in);
@@ -24,19 +37,84 @@ public class ParkingSystem1 extends TimeFareController {
     static Connection con;
     static Statement stmt;
 
-    static final String USER = "root";
-    static final String PWD = "DBMS";
 
-    //Pre-existing parking of 10 slots for each car and 20 for bikes
-    public ParkingSystem1() {
-        smallCarSlots = 10;
-        mediumCarSlots = 10;
-        largeCarSlots = 10;
-        totalBikeSlots = 20;
-        smallCarSlotsArray = new Vehicle[smallCarSlots][1];
-        mediumCarSlotsArray = new Vehicle[mediumCarSlots][1];
-        largeCarSlotsArray = new Vehicle[largeCarSlots][1];
-        bikeSlotsArray = new Vehicle[totalBikeSlots][1];
+
+    /*public class  FileHandling{
+
+    private static void FileHandling(String userCommand, String licensePlate, LocalDateTime entryTime, LocalDateTime exitTime, double fare) {
+        String filePath = "C:/Users/hp/OneDrive/Desktop/work/sem3/java/Project/ParkingSystem edit 3/ParkingSystem/parking/user_interaction_log.txt";
+
+        try {
+            File file = new File(filePath);
+
+            // Create the file if it doesn't exist
+            if (!file.exists()) {
+                if (file.createNewFile()) {
+                    System.out.println("File created successfully: " + filePath);
+                } else {
+                    System.out.println("Failed to create the file: " + filePath);
+                    return;
+                }
+            }
+
+            try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+                writer.println("User command - " + LocalDateTime.now() + ": " + userCommand);
+                if (licensePlate != null) {
+                    writer.println("License Plate: " + licensePlate);
+                }
+                if (entryTime != null) {
+                    writer.println("Entry Time: " + entryTime.format(formatter));
+                }
+                if (exitTime != null) {
+                    writer.println("Exit Time: " + exitTime.format(formatter));
+                }
+                writer.println("Fare: " + fare);
+                writer.println("------------------------");
+
+                // Log to the database
+                // logToDatabase(licensePlate, userCommand, entryTime, exitTime, fare);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("File created successfully: " + filePath);
+
+    }
+}
+    private static void logToDatabase(String licensePlate, String userCommand, LocalDateTime entryTime, LocalDateTime exitTime, double fare) {
+        try (Connection connection = createConnection()) {
+            String query = "INSERT INTO user_interaction_log (license_plate, user_command, entry_time, exit_time, fare) VALUES (?, ?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, licensePlate);
+                preparedStatement.setString(2, userCommand);
+                preparedStatement.setTimestamp(3, Timestamp.valueOf(entryTime));
+                preparedStatement.setTimestamp(4, exitTime != null ? Timestamp.valueOf(exitTime) : null);
+                preparedStatement.setDouble(5, fare);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }*/
+
+
+
+
+
+
+
+    static final String USER = "root";
+    static final String PWD = "qwerty";
+
+    private static void logUserInteraction(String userCommand) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("user_interaction_log.txt", true))) {
+            writer.println("User command - " + LocalDateTime.now() + ": " + userCommand);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // 1. Load and register Driver
@@ -59,7 +137,17 @@ public class ParkingSystem1 extends TimeFareController {
         return con;
     }
 	
-    
+
+    public ParkingSystem1() {
+        smallCarSlots = 10;
+        mediumCarSlots = 10;
+        largeCarSlots = 10;
+        totalBikeSlots = 20;
+        smallCarSlotsArray = new Vehicle[smallCarSlots][1];
+        mediumCarSlotsArray = new Vehicle[mediumCarSlots][1];
+        largeCarSlotsArray = new Vehicle[largeCarSlots][1];
+        bikeSlotsArray = new Vehicle[totalBikeSlots][1];
+    }
 
     private static void addVehicleToDatabase(String licensePlate, String vehicleType, String size) {
     try (Connection connection = createConnection()) {
@@ -88,7 +176,7 @@ private static void removeVehicleFromDatabase(String licensePlate) {
     }
 }
 
-    void defineNewsStructure() {
+    void define() {
         boolean validSlots = true;
 
         while (validSlots) {
@@ -117,7 +205,7 @@ private static void removeVehicleFromDatabase(String licensePlate) {
             }
         }
     }
-    void Customer(){
+    void use(){
 
         while (true) {
             System.out.println("\nWhat would you like to do?");
@@ -125,6 +213,7 @@ private static void removeVehicleFromDatabase(String licensePlate) {
             System.out.println("2. Remove a vehicle");
             System.out.println("3. Find parked vehicle");
             System.out.println("4. Restart");
+            System.out.println("5. Exit");
             int choice = sc.nextInt();
 
             switch (choice) {
@@ -140,6 +229,8 @@ private static void removeVehicleFromDatabase(String licensePlate) {
                     break;
                 case 4:
                     Parking.main(null);
+                case 5:
+                    System.exit(0);
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
@@ -190,6 +281,9 @@ private static void removeVehicleFromDatabase(String licensePlate) {
             Vehicle car = new Vehicle(licensePlate, "car",time);
 		// Add vehicle information to the database
             addVehicleToDatabase(licensePlate, "car", size);
+
+              // Log to the file
+              filehandling.FileHandling.logToFile("Park Vehicle", licensePlate, time, null, 0.0);
 
             if (size.equals("small")) {
                 for (int i = 0; i < smallCarSlotsArray.length; i++) {
@@ -242,6 +336,8 @@ private static void removeVehicleFromDatabase(String licensePlate) {
 
             Vehicle bike = new Vehicle(licensePlate, "bike",time);
  addVehicleToDatabase(licensePlate, "bike", "N/A");
+ // Log to the file
+              filehandling.FileHandling.logToFile("Park Vehicle", licensePlate, time, null, 0.0);
             for (int i = 0; i < bikeSlotsArray.length; i++) {
                 if (bikeSlotsArray[i][0] == null) {
                     bikeSlotsArray[i][0] = bike;
@@ -304,7 +400,8 @@ private static void removeVehicleFromDatabase(String licensePlate) {
                 
                 // Add the line to remove the vehicle from the database
                 removeVehicleFromDatabase(licensePlate);
-                
+
+                filehandling.FileHandling.logToFile("Remove Vehicle", licensePlate, entryTime, exitTime, calculateFare(entryTime, exitTime));
                 return;
             } else if (size.equals("medium") && mediumCarSlotsArray[i][0] != null &&
                     mediumCarSlotsArray[i][0].getLicensePlate().equals(licensePlate)) {
@@ -320,6 +417,8 @@ private static void removeVehicleFromDatabase(String licensePlate) {
                 // Add the line to remove the vehicle from the database
                 removeVehicleFromDatabase(licensePlate);
 
+                filehandling.FileHandling.logToFile("Remove Vehicle", licensePlate, entryTime, exitTime, calculateFare(entryTime, exitTime));
+
                 return;
             } else if (size.equals("large") && largeCarSlotsArray[i][0] != null &&
                     largeCarSlotsArray[i][0].getLicensePlate().equals(licensePlate)) {
@@ -334,6 +433,7 @@ private static void removeVehicleFromDatabase(String licensePlate) {
 
                 // Add the line to remove the vehicle from the database
                 removeVehicleFromDatabase(licensePlate);
+                filehandling.FileHandling.logToFile("Remove Vehicle", licensePlate, entryTime, exitTime, calculateFare(entryTime, exitTime));
 
                 return;
             }
@@ -362,6 +462,7 @@ private static void removeVehicleFromDatabase(String licensePlate) {
                     System.out.println("Exit time: "+exitTime.format(formatter));
                     System.out.println("Your total fare is: " + calculateFare(entryTime,exitTime));
 		    removeVehicleFromDatabase(licensePlate);
+            filehandling.FileHandling.logToFile("Remove Vehicle", licensePlate, entryTime, exitTime, calculateFare(entryTime, exitTime));
                     return;
 
                 }
