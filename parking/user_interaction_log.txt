@@ -19,3 +19,13 @@ License Plate: 1234
 Entry Time: 2023-12-05 12:38:45
 Fare: 0.0
 ------------------------
+User command - 2023-12-05T16:19:57.986175700: Park Vehicle
+License Plate: T6789
+Entry Time: 2023-12-05 16:19:57
+Fare: 0.0
+------------------------
+User command - 2023-12-05T16:24:49.667656600: Park Vehicle
+License Plate: HER4
+Entry Time: 2023-12-05 16:24:48
+Fare: 0.0
+------------------------

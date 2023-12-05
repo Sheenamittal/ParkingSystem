@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class FileHandling {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private static final String filePath = "C:/Users/hp/OneDrive/Desktop/ParkingSystem/parking/user_interaction_log.txt";
+    private static final String filePath = "C:/Users/Sanya Goel/Desktop/ParkingSystem/parking/user_interaction_log.txt";
 
     public static void logToFile(String userCommand, String licensePlate, LocalDateTime entryTime, LocalDateTime exitTime, double fare) {
         try {

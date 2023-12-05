@@ -78,6 +78,7 @@ class Parking {
                     startAgain = true;
                     break;
                 case 6:
+		    parkingSystem.changeParkingClosed();
                     System.exit(0);
                 default:
                     System.out.println("Invalid choice");

@@ -36,7 +36,7 @@ public class ParkingSystem1 extends TimeFareController {
 
 
     static final String USER = "root";
-    static final String PWD = "qwerty";
+    static final String PWD = "1234";
 
     // 1. Load and register Driver
     static void loadDriver() {
@@ -97,6 +97,16 @@ private static void removeVehicleFromDatabase(String licensePlate) {
     }
 }
 
+public static void changeParkingClosed() {
+    try (Connection connection = createConnection()) {
+        String query = "UPDATE vehicle SET status = 'abruptly removed' WHERE status = 'parked'";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
+        }
+    } catch (SQLException e) {
+        System.out.println(e);
+    }
+}
     void define() {
         boolean validSlots = true;
 
