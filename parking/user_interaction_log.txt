@@ -3,3 +3,19 @@ License Plate: 435
 Entry Time: 2023-12-05 01:20:20
 Fare: 0.0
 ------------------------
+User command - 2023-12-05T12:37:33.580716800: Park Vehicle
+License Plate: 123we
+Entry Time: 2023-12-05 12:37:32
+Fare: 0.0
+------------------------
+User command - 2023-12-05T12:38:09.408366800: Remove Vehicle
+License Plate: 123we
+Entry Time: 2023-12-05 12:37:32
+Exit Time: 2023-12-05 12:38:09
+Fare: 40.0
+------------------------
+User command - 2023-12-05T12:38:46.345920800: Park Vehicle
+License Plate: 1234
+Entry Time: 2023-12-05 12:38:45
+Fare: 0.0
+------------------------

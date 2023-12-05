@@ -2,19 +2,16 @@ package parking;
 import vehicle.*;
 import timefare.*;
 import java.util.Scanner;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import filehandling.*;
 
 
@@ -38,84 +35,8 @@ public class ParkingSystem1 extends TimeFareController {
     static Statement stmt;
 
 
-
-    /*public class  FileHandling{
-
-    private static void FileHandling(String userCommand, String licensePlate, LocalDateTime entryTime, LocalDateTime exitTime, double fare) {
-        String filePath = "C:/Users/hp/OneDrive/Desktop/work/sem3/java/Project/ParkingSystem edit 3/ParkingSystem/parking/user_interaction_log.txt";
-
-        try {
-            File file = new File(filePath);
-
-            // Create the file if it doesn't exist
-            if (!file.exists()) {
-                if (file.createNewFile()) {
-                    System.out.println("File created successfully: " + filePath);
-                } else {
-                    System.out.println("Failed to create the file: " + filePath);
-                    return;
-                }
-            }
-
-            try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
-                writer.println("User command - " + LocalDateTime.now() + ": " + userCommand);
-                if (licensePlate != null) {
-                    writer.println("License Plate: " + licensePlate);
-                }
-                if (entryTime != null) {
-                    writer.println("Entry Time: " + entryTime.format(formatter));
-                }
-                if (exitTime != null) {
-                    writer.println("Exit Time: " + exitTime.format(formatter));
-                }
-                writer.println("Fare: " + fare);
-                writer.println("------------------------");
-
-                // Log to the database
-                // logToDatabase(licensePlate, userCommand, entryTime, exitTime, fare);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("File created successfully: " + filePath);
-
-    }
-}
-    private static void logToDatabase(String licensePlate, String userCommand, LocalDateTime entryTime, LocalDateTime exitTime, double fare) {
-        try (Connection connection = createConnection()) {
-            String query = "INSERT INTO user_interaction_log (license_plate, user_command, entry_time, exit_time, fare) VALUES (?, ?, ?, ?, ?)";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setString(1, licensePlate);
-                preparedStatement.setString(2, userCommand);
-                preparedStatement.setTimestamp(3, Timestamp.valueOf(entryTime));
-                preparedStatement.setTimestamp(4, exitTime != null ? Timestamp.valueOf(exitTime) : null);
-                preparedStatement.setDouble(5, fare);
-                preparedStatement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }*/
-
-
-
-
-
-
-
     static final String USER = "root";
     static final String PWD = "qwerty";
-
-    private static void logUserInteraction(String userCommand) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("user_interaction_log.txt", true))) {
-            writer.println("User command - " + LocalDateTime.now() + ": " + userCommand);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     // 1. Load and register Driver
     static void loadDriver() {
