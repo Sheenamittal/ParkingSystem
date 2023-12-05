@@ -1,5 +1,6 @@
 package parking;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Parking {
@@ -21,14 +22,14 @@ class Parking {
                 if (adminAuthentication()) {
                     adminMenu();
                 } else {
-                    System.out.println("Admin password attempts exhausted. Terminating program.");
+                    System.out.println("Terminating program for safety reasons.");
                     System.exit(0);
                 }
             } else if (userRole.equalsIgnoreCase("customer")) {
                 parkingSystem.use();
             }
 
-            
+            sc.nextLine();
         }
     }
 
@@ -39,6 +40,7 @@ class Parking {
         for (int i = 0; i < adminTries; i++) {
             System.out.println("Enter admin password: ");
             String enteredPassword = sc.nextLine();
+
             if (enteredPassword.equals(adminPassword)) {
                 return true; // Admin authentication successful
             } else {
@@ -50,15 +52,16 @@ class Parking {
 
     private static void adminMenu() {
         boolean startAgain = false;
-
+        try{
         while (!startAgain) {
+            
             int num = 0;
             System.out.println("1. Add a new parking lot");
-            System.out.println("2. View Parked Cars");
+            System.out.println("2. View Parked Vehicles");
             System.out.println("3. View Database");
             System.out.println("4. View Text File");
             System.out.println("5. Restart");
-            System.out.println("6. Terminate");
+            System.out.println("6. Close Parking");
             num = sc.nextInt();
 
             switch (num) {
@@ -72,17 +75,20 @@ class Parking {
                     parkingSystem.viewDatabase();
                     break;
                 case 4:
-                    // Add the code for viewing the text file
+               filehandling.FileHandling.viewTextFile();
                     break;
                 case 5:
                     startAgain = true;
                     break;
                 case 6:
-		    parkingSystem.changeParkingClosed();
+                parkingSystem.changeParkingClosed();
                     System.exit(0);
                 default:
                     System.out.println("Invalid choice");
             }
-        }
+        } 
+        }catch(InputMismatchException e) {
+        System.out.println("InputMismatchError. Please try again");
+         }
     }
 }

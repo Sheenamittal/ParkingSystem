@@ -19,13 +19,92 @@ License Plate: 1234
 Entry Time: 2023-12-05 12:38:45
 Fare: 0.0
 ------------------------
-User command - 2023-12-05T16:19:57.986175700: Park Vehicle
-License Plate: T6789
-Entry Time: 2023-12-05 16:19:57
+User command - 2023-12-05T19:25:21.302489500: Park Vehicle
+License Plate: 123er
+Entry Time: 2023-12-05 19:25:21
 Fare: 0.0
 ------------------------
-User command - 2023-12-05T16:24:49.667656600: Park Vehicle
-License Plate: HER4
-Entry Time: 2023-12-05 16:24:48
+User command - 2023-12-05T19:27:01.718319: Park Vehicle
+License Plate: asd
+Entry Time: 2023-12-05 19:27:01
 Fare: 0.0
+------------------------
+User command - 2023-12-06T01:04:26.457473400: Park Vehicle
+License Plate: 9034
+Entry Time: 2023-12-06 01:04:26
+Fare: 0.0
+------------------------
+User command - 2023-12-06T01:05:21.968232900: Park Vehicle
+License Plate: 8045
+Entry Time: 2023-12-06 01:05:21
+Fare: 0.0
+------------------------
+User command - 2023-12-06T01:13:44.070676400: Park Vehicle
+License Plate: qwe
+Entry Time: 2023-12-06 01:13:43
+Fare: 0.0
+------------------------
+User command - 2023-12-06T01:20:34.907231600: Park Vehicle
+License Plate: rty123
+Entry Time: 2023-12-06 01:20:34
+Fare: 0.0
+------------------------
+User command - 2023-12-06T01:21:04.770708900: Park Vehicle
+License Plate: 234wert
+Entry Time: 2023-12-06 01:21:04
+Fare: 0.0
+------------------------
+User command - 2023-12-06T01:21:13.008455: Park Vehicle
+License Plate: rigoh tu9
+Entry Time: 2023-12-06 01:21:12
+Fare: 0.0
+------------------------
+User command - 2023-12-06T01:21:24.307757100: Park Vehicle
+License Plate: ieurhhg1234
+Entry Time: 2023-12-06 01:21:24
+Fare: 0.0
+------------------------
+User command - 2023-12-06T01:22:05.312322300: Park Vehicle
+License Plate: qwe234
+Entry Time: 2023-12-06 01:22:05
+Fare: 0.0
+------------------------
+User command - 2023-12-06T01:22:13.502904100: Park Vehicle
+License Plate: wert
+Entry Time: 2023-12-06 01:22:13
+Fare: 0.0
+------------------------
+User command - 2023-12-06T01:22:34.414947700: Remove Vehicle
+License Plate: wert
+Entry Time: 2023-12-06 01:22:13
+Exit Time: 2023-12-06 01:22:34
+Fare: 40.0
+------------------------
+User command - 2023-12-06T01:25:03.894841300: Remove Vehicle
+License Plate: qwe234
+Entry Time: 2023-12-06 01:22:05
+Exit Time: 2023-12-06 01:25:03
+Fare: 40.0
+------------------------
+User command - 2023-12-06T01:25:35.390930200: Remove Vehicle
+License Plate: rigoh tu9
+Entry Time: 2023-12-06 01:21:12
+Exit Time: 2023-12-06 01:25:35
+Fare: 40.0
+------------------------
+User command - 2023-12-06T02:14:06.874187200: Park Vehicle
+License Plate: 35hf
+Entry Time: 2023-12-06 02:14:06
+Fare: 0.0
+------------------------
+User command - 2023-12-06T02:16:01.211055700: Park Vehicle
+License Plate: 8056
+Entry Time: 2023-12-06 02:16:00
+Fare: 0.0
+------------------------
+User command - 2023-12-06T02:16:33.252115800: Remove Vehicle
+License Plate: 8056
+Entry Time: 2023-12-06 02:16:00
+Exit Time: 2023-12-06 02:16:33
+Fare: 40.0
 ------------------------
