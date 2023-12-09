@@ -33,6 +33,8 @@ class Parking {
         }
     }
 
+    // Increments the security of the system
+
     private static boolean adminAuthentication() {
         int adminTries = 2; // Set the maximum number of tries for the admin
         String adminPassword = "admin"; // Set the admin password
@@ -49,6 +51,8 @@ class Parking {
         }
         return false; // Admin password attempts exhausted
     }
+
+    // Admin's list of functionalities
 
     private static void adminMenu() {
         boolean startAgain = false;
@@ -81,6 +85,7 @@ class Parking {
                     startAgain = true;
                     break;
                 case 6:
+                //Updating the database and terminating the programme
                 parkingSystem.changeParkingClosed();
                     System.exit(0);
                 default:

@@ -11,8 +11,11 @@ import java.time.format.DateTimeFormatter;
 
 public class FileHandling {
 
+    //setting up File Handling
+    //added a text file named user_interaction_log
+
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private static final String filePath = "C:/Users/hp/OneDrive/Desktop/ParkingSystem/parking/user_interaction_log.txt";
+    private static final String filePath = "C:/Users/hp/OneDrive/Desktop/ParkingSystem/parking/user_interaction_log.txt"; //modify the path and file name accordingly
 
     public static void logToFile(String userCommand, String licensePlate, LocalDateTime entryTime, LocalDateTime exitTime, double fare) {
         try {
@@ -54,8 +57,10 @@ public class FileHandling {
             e.printStackTrace();
         }
     }
-
+     
+    //Function to show the contents of the file in console
     public static void viewTextFile() {
+        
         try {
             String filePath = "C:/Users/hp/OneDrive/Desktop/ParkingSystem/parking/user_interaction_log.txt";
             Path path = Paths.get(filePath);

@@ -30,6 +30,8 @@ interface ParkingManagement {
     int countOccupiedSlots(Vehicle[][] slots);
 }
 
+    
+
 public class ParkingSystem1 extends TimeFareController {
     // public static marks = 10;
     static int smallCarSlots, mediumCarSlots, largeCarSlots, totalBikeSlots;
@@ -61,6 +63,8 @@ public class ParkingSystem1 extends TimeFareController {
         }
         return con;
     }
+
+    // Default Parking
 
     public ParkingSystem1() {
         smallCarSlots = 30;
@@ -115,6 +119,8 @@ public class ParkingSystem1 extends TimeFareController {
         }
     }
 
+    // If the admin wants to change the structure or add a new parking lot
+
     void define() {
         boolean validSlots = true;
 
@@ -145,6 +151,8 @@ public class ParkingSystem1 extends TimeFareController {
             }
         }
     }
+
+    // Customer's menu
     
     void use() {
             try{
@@ -179,6 +187,7 @@ public class ParkingSystem1 extends TimeFareController {
         }
     
 
+
     public static void parkVehicle() {
         sc.nextLine();
         System.out.println("Enter the vehicle type (car or bike):");
@@ -192,6 +201,8 @@ public class ParkingSystem1 extends TimeFareController {
             System.out.println("Invalid vehicle type. Please enter 'car' or 'bike'.");
         }
     }
+
+    // Parking based on vehicle type
 
     public static void parkCar() {
         int availableSlots = 0;
@@ -208,6 +219,8 @@ public class ParkingSystem1 extends TimeFareController {
             System.out.println("Please enter a valid type");
             return;
         }
+
+
 
         if (availableSlots > 0) {
             System.out.println("Enter the license plate number:");
@@ -226,6 +239,8 @@ public class ParkingSystem1 extends TimeFareController {
 
             // Log to the file
             filehandling.FileHandling.logToFile("Park Vehicle", licensePlate, time, null, 0.0);
+
+            // Parking on basis of size
 
             if (size.equals("small")) {
                 for (int i = 0; i < smallCarSlotsArray.length; i++) {
@@ -292,6 +307,8 @@ public class ParkingSystem1 extends TimeFareController {
             System.out.println("Sorry, there are no available bike slots.");
         }
     }
+
+    // Removing from array
 
     public static void removeVehicle() {
         sc.nextLine();
@@ -417,6 +434,8 @@ public class ParkingSystem1 extends TimeFareController {
         }
     }
 
+    // Function to show all the current data in the array 
+
     public static void viewParkedVehicles() {
         System.out.println("Parked cars: " + (countParkedVehicles(smallCarSlotsArray, "car") +
                 countParkedVehicles(mediumCarSlotsArray, "car") +
@@ -438,6 +457,8 @@ public class ParkingSystem1 extends TimeFareController {
         viewParkedVehiclesByType(bikeSlotsArray, "bike");
     }
 
+    // Counting Parked Vehicle
+
     public static int countParkedVehicles(Vehicle[][] slots, String vehicleType) {
         int count = 0;
         for (int i = 0; i < slots.length; i++) {
@@ -447,6 +468,8 @@ public class ParkingSystem1 extends TimeFareController {
         }
         return count;
     }
+
+    // Vehicles by specific size and type
 
     public static void viewParkedVehiclesByType(Vehicle[][] slots, String vehicleType) {
         for (int i = 0; i < slots.length; i++) {
@@ -467,6 +490,8 @@ public class ParkingSystem1 extends TimeFareController {
         }
         return count;
     }
+
+    // Returns the index, type and size of the searched for vehicle
 
     public void findParkedVehicle() {
         System.out.println("Enter the type (car or bike) of vehicle");
@@ -535,6 +560,8 @@ public class ParkingSystem1 extends TimeFareController {
         }
         return true; // License plate is unique
     }
+
+    // Database input in terminal
 
     public void viewDatabase() {
         try (Connection connection = createConnection()) {
